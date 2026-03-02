@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["DM Serif Display", "serif"],
+        serif: ["Playfair Display", "serif"],
         sans: ["DM Sans", "sans-serif"],
       },
       colors: {
@@ -51,6 +51,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        gold: "hsl(var(--gold))",
+        "gold-muted": "hsl(var(--gold-muted))",
+        champagne: "hsl(var(--champagne))",
+        charcoal: "hsl(var(--charcoal))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
