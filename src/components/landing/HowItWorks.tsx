@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { UserCheck, FileCheck, Share2, CheckCircle } from "lucide-react";
+import verificationImage from "@/assets/verification-moment.png";
 
 const steps = [
   {
     icon: UserCheck,
     title: "Verification",
-    description: "A trusted authority verifies that an individual qualifies for disability-related accommodations.",
+    description: "A trusted authority verifies qualification for disability-related accommodations.",
   },
   {
     icon: FileCheck,
@@ -20,13 +21,13 @@ const steps = [
   {
     icon: CheckCircle,
     title: "Instant Verification",
-    description: "Institutions verify the credential without accessing underlying medical documentation.",
+    description: "Institutions verify the credential without accessing medical documentation.",
   },
 ];
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="section-padding">
+    <section id="how-it-works" className="section-padding bg-muted/40">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +44,7 @@ const HowItWorks = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {steps.map((step, i) => (
             <motion.div
               key={step.title}
@@ -64,6 +65,28 @@ const HowItWorks = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Verification photo */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative rounded-3xl overflow-hidden max-w-4xl mx-auto"
+        >
+          <img
+            src={verificationImage}
+            alt="Two professionals exchanging verified credential on tablet"
+            className="w-full object-cover rounded-3xl"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent rounded-3xl" />
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="glass-card-strong rounded-xl px-5 py-3 inline-flex items-center gap-3">
+              <CheckCircle className="w-4 h-4 text-accent" />
+              <span className="text-sm font-medium text-foreground">Secure, instant credential verification</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

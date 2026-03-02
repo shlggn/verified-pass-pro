@@ -1,17 +1,15 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-abstract.png";
+import heroImage from "@/assets/hero-credential.png";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center section-padding pt-32 overflow-hidden">
-      {/* Subtle warm glow background */}
       <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full warm-glow opacity-40 pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/3 w-[300px] h-[300px] bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Text */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -42,7 +40,6 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        {/* Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -52,10 +49,9 @@ const HeroSection = () => {
           <div className="relative">
             <img
               src={heroImage}
-              alt="Abstract glass shapes representing privacy and transparency"
-              className="w-full max-w-lg rounded-3xl animate-float"
+              alt="Hand holding phone showing verified credential checkmark"
+              className="w-full max-w-lg rounded-3xl shadow-2xl"
             />
-            {/* Floating credential card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
