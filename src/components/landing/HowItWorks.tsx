@@ -1,89 +1,112 @@
 import { motion } from "framer-motion";
-import { UserCheck, FileCheck, Share2, CheckCircle } from "lucide-react";
+import { UserCheck, FileCheck, Share2, CheckCircle, ArrowRight } from "lucide-react";
 import verificationImage from "@/assets/verification-moment.png";
 
 const steps = [
   {
     icon: UserCheck,
     title: "Verification",
-    description: "A trusted authority verifies qualification for disability-related accommodations.",
+    subtitle: "Trusted Authority",
+    description: "A healthcare provider or disability services office verifies that you qualify for accommodations.",
   },
   {
     icon: FileCheck,
-    title: "Credential Issued",
-    description: "A digital credential confirming eligibility is issued — no diagnoses revealed.",
+    title: "Issuance",
+    subtitle: "Digital Credential",
+    description: "A portable credential is issued confirming eligibility — without revealing any diagnosis.",
   },
   {
     icon: Share2,
-    title: "User-Controlled Sharing",
-    description: "The individual chooses when and where to share their credential.",
+    title: "Sharing",
+    subtitle: "User-Controlled",
+    description: "You decide when, where, and with whom to share your credential. Full consent, always.",
   },
   {
     icon: CheckCircle,
-    title: "Instant Verification",
-    description: "Institutions verify the credential without accessing medical documentation.",
+    title: "Acceptance",
+    subtitle: "Instant Verification",
+    description: "Institutions verify your credential in seconds — no medical records required.",
   },
 ];
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="section-padding bg-muted/40">
-      <div className="max-w-7xl mx-auto">
+    <section id="how-it-works" className="section-padding relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-champagne/40 via-background to-champagne/40 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-20 max-w-2xl mx-auto"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-accent mb-4 block">
-            Process
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-foreground">
-            How it works
+          <span className="section-label">How It Works</span>
+          <h2 className="section-heading mb-5">
+            Four steps to dignified access
           </h2>
+          <p className="text-muted-foreground text-lg font-light leading-relaxed">
+            A streamlined process that puts you in control of your credentials — from verification to acceptance.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {/* Steps timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-0 mb-20 relative">
+          {/* Connecting line */}
+          <div className="absolute top-[2.75rem] left-[10%] right-[10%] hidden md:block">
+            <div className="luxury-divider" />
+          </div>
+
           {steps.map((step, i) => (
             <motion.div
               key={step.title}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="glass-card rounded-2xl p-7 relative group hover:shadow-xl transition-shadow duration-300"
+              transition={{ duration: 0.7, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="relative text-center px-4 md:px-6"
             >
-              <span className="absolute top-5 right-6 text-6xl font-serif text-muted/60 font-bold select-none">
-                {i + 1}
-              </span>
-              <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+              {/* Step number */}
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-card glass-card flex items-center justify-center mb-6 relative z-10">
                 <step.icon className="w-5 h-5 text-accent" />
               </div>
-              <h3 className="text-lg font-sans font-semibold text-foreground mb-2">{step.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+
+              <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-accent block mb-2">
+                {step.subtitle}
+              </span>
+              <h3 className="text-xl font-serif text-foreground mb-3">{step.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-[220px] mx-auto">{step.description}</p>
+
+              {i < steps.length - 1 && (
+                <ArrowRight className="w-4 h-4 text-gold-muted absolute top-[2.5rem] -right-2 hidden md:block" />
+              )}
             </motion.div>
           ))}
         </div>
 
-        {/* Verification photo */}
+        {/* Full-width image */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="relative rounded-3xl overflow-hidden max-w-4xl mx-auto"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-3xl overflow-hidden max-w-5xl mx-auto group"
         >
           <img
             src={verificationImage}
-            alt="Two professionals exchanging verified credential on tablet"
-            className="w-full object-cover rounded-3xl"
+            alt="Secure credential verification between two professionals"
+            className="w-full object-cover aspect-[21/9] group-hover:scale-[1.02] transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent rounded-3xl" />
-          <div className="absolute bottom-6 left-6 right-6">
-            <div className="glass-card-strong rounded-xl px-5 py-3 inline-flex items-center gap-3">
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/10 to-transparent" />
+          <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between">
+            <div>
+              <p className="text-primary-foreground text-2xl font-serif mb-1">Verification in seconds.</p>
+              <p className="text-primary-foreground/70 text-sm font-light">No medical records exchanged. Ever.</p>
+            </div>
+            <div className="glass-card rounded-full px-4 py-2 flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-foreground">Secure, instant credential verification</span>
+              <span className="text-xs font-medium text-foreground">Credential Valid</span>
             </div>
           </div>
         </motion.div>
