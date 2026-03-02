@@ -57,7 +57,7 @@ const ForWhom = () => {
         >
           <img
             src={credentialGraphic}
-            alt="Shield credential graphic"
+            alt="Shield credential graphic representing privacy protection"
             className="w-72 lg:w-80 animate-float"
           />
         </motion.div>
