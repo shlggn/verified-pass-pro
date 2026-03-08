@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { href: "#problem", label: "The Problem" },
@@ -10,6 +12,8 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { user } = useAuth();
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
@@ -44,8 +48,10 @@ const Navbar = () => {
           ))}
         </div>
 
-        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
-          Request Access
+        <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
+          <Link to={user ? "/dashboard" : "/auth"}>
+            {user ? "Dashboard" : "Request Access"}
+          </Link>
         </Button>
       </div>
     </motion.nav>
