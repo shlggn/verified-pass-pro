@@ -1,9 +1,11 @@
 import { Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Use Cases", href: "#use-cases" },
   { label: "Benefits", href: "#value" },
+  { label: "Sign Up", href: "/auth", isRoute: true },
 ];
 
 const Footer = () => {
