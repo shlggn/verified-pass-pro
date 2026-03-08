@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-credential.png";
 
 const fadeUp = {
