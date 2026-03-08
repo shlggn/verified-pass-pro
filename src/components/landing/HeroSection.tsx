@@ -58,11 +58,13 @@ const HeroSection = () => {
             variants={fadeUp} initial="hidden" animate="visible" custom={3}
             className="flex flex-wrap items-center gap-4 mb-12"
           >
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-charcoal rounded-full px-9 gap-2.5 text-[15px] font-medium shadow-lg shadow-primary/10 h-13">
-              Get Early Access <ArrowRight className="w-4 h-4" />
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-charcoal rounded-full px-9 gap-2.5 text-[15px] font-medium shadow-lg shadow-primary/10 h-13">
+              <Link to="/auth">
+                Get Early Access <ArrowRight className="w-4 h-4" />
+              </Link>
             </Button>
-            <Button size="lg" variant="ghost" className="rounded-full px-8 text-[15px] text-muted-foreground hover:text-foreground h-13">
-              See how it works
+            <Button asChild size="lg" variant="ghost" className="rounded-full px-8 text-[15px] text-muted-foreground hover:text-foreground h-13">
+              <a href="#how-it-works">See how it works</a>
             </Button>
           </motion.div>
 

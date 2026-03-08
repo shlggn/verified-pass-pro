@@ -5,27 +5,27 @@ import verificationImage from "@/assets/verification-moment.png";
 const steps = [
   {
     icon: UserCheck,
-    title: "Verification",
-    subtitle: "Trusted Authority",
-    description: "A healthcare provider or disability services office verifies that you qualify for accommodations.",
+    title: "Sign Up",
+    subtitle: "Create Account",
+    description: "Register as an individual or verifying organization in seconds — choose your role.",
   },
   {
     icon: FileCheck,
-    title: "Issuance",
-    subtitle: "Digital Credential",
-    description: "A portable credential is issued confirming eligibility — without revealing any diagnosis.",
+    title: "Submit Credentials",
+    subtitle: "Upload Documents",
+    description: "Upload your disability certificate or supporting documents for secure, private review.",
   },
   {
     icon: Share2,
-    title: "Sharing",
-    subtitle: "User-Controlled",
-    description: "You decide when, where, and with whom to share your credential. Full consent, always.",
+    title: "Get Verified",
+    subtitle: "Admin Review",
+    description: "Our team reviews and approves your credentials — no diagnosis details are stored.",
   },
   {
     icon: CheckCircle,
-    title: "Acceptance",
-    subtitle: "Instant Verification",
-    description: "Institutions verify your credential in seconds — no medical records required.",
+    title: "Share via QR",
+    subtitle: "Privacy-First Sharing",
+    description: "Generate a QR code to share your verified status instantly — you control what's shared.",
   },
 ];
 
