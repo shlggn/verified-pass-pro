@@ -43,10 +43,13 @@ const CtaSection = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
+                asChild
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-10 gap-2.5 text-[15px] font-medium shadow-lg shadow-accent/20 h-13"
               >
-                Get Early Access <ArrowRight className="w-4 h-4" />
+                <Link to="/auth">
+                  Get Early Access <ArrowRight className="w-4 h-4" />
+                </Link>
               </Button>
               <Button
                 size="lg"
