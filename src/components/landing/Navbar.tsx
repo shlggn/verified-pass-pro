@@ -48,8 +48,10 @@ const Navbar = () => {
           ))}
         </div>
 
-        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
-          Request Access
+        <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
+          <Link to={user ? "/dashboard" : "/auth"}>
+            {user ? "Dashboard" : "Request Access"}
+          </Link>
         </Button>
       </div>
     </motion.nav>
