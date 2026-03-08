@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { href: "#problem", label: "The Problem" },
