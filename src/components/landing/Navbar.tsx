@@ -48,11 +48,22 @@ const Navbar = () => {
           ))}
         </div>
 
-        <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
-          <Link to={user ? "/dashboard" : "/auth"}>
-            {user ? "Dashboard" : "Request Access"}
-          </Link>
-        </Button>
+        <div className="flex items-center gap-3">
+          {user ? (
+            <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+          ) : (
+            <>
+              <Link to="/auth" className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Sign In
+              </Link>
+              <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 text-[13px] font-medium shadow-md">
+                <Link to="/auth">Get Started</Link>
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </motion.nav>
   );
