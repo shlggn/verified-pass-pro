@@ -12,6 +12,8 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { user } = useAuth();
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
