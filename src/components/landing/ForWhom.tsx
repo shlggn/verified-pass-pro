@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import { User, Building2, GraduationCap, Bus, Home, Ticket } from "lucide-react";
+import { User, Building2, GraduationCap, Bus, ShieldCheck, Ticket } from "lucide-react";
 import credentialGraphic from "@/assets/credential-graphic.png";
 
 const audiences = [
-  { icon: User, label: "Individuals with disabilities", desc: "Take control of your credentials" },
-  { icon: GraduationCap, label: "Universities", desc: "Streamline student accommodations" },
-  { icon: Building2, label: "Employers", desc: "Simplify workplace accessibility" },
-  { icon: Bus, label: "Transit agencies", desc: "Verify eligibility instantly" },
-  { icon: Home, label: "Housing providers", desc: "Confirm qualifications privately" },
-  { icon: Ticket, label: "Event venues", desc: "Enable accessible experiences" },
+  { icon: User, label: "Individuals with disabilities", desc: "Upload credentials, generate QR codes, share on your terms" },
+  { icon: Building2, label: "Employers & Verifiers", desc: "Scan QR codes to instantly verify eligibility — no paperwork" },
+  { icon: ShieldCheck, label: "Administrators", desc: "Review, approve, and manage credential applications" },
+  { icon: GraduationCap, label: "Universities", desc: "Streamline student accommodation verification" },
+  { icon: Bus, label: "Transit agencies", desc: "Verify concession eligibility at point of service" },
+  { icon: Ticket, label: "Event venues & Housing", desc: "Confirm qualifications privately and instantly" },
 ];
 
 const ForWhom = () => {

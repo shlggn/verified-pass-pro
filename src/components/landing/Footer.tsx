@@ -1,9 +1,11 @@
 import { Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Use Cases", href: "#use-cases" },
   { label: "Benefits", href: "#value" },
+  { label: "Sign Up", href: "/auth", isRoute: true },
 ];
 
 const Footer = () => {
@@ -29,15 +31,25 @@ const Footer = () => {
 
           {/* Links */}
           <div className="flex items-center gap-8">
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
+            {footerLinks.map((link) =>
+              'isRoute' in link && link.isRoute ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="text-sm text-accent font-medium hover:text-foreground transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
         </div>
 
