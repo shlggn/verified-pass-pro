@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Camera, QrCode, Search, CheckCircle2, XCircle, AlertTriangle, X } from "lucide-react";
+import { Camera, QrCode, Search, CheckCircle2, XCircle, AlertTriangle, X, Accessibility, HandHelping } from "lucide-react";
 import { Html5Qrcode } from "html5-qrcode";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ const VerifyPage = () => {
 
     const { data, error: err } = await supabase
       .from("credentials")
-      .select("id, title, credential_type, status, issuing_authority, expires_at, created_at")
+      .select("id, title, credential_type, status, issuing_authority, expires_at, created_at, support_needs, support_summary")
       .eq("qr_code_token", cleanToken)
       .single();
 
@@ -205,21 +205,50 @@ const VerifyPage = () => {
         {result && (
           <Card className="border-border">
             <CardContent className="p-6">
-              <div className={`flex items-center gap-3 mb-6 p-4 rounded-xl ${isValid ? "bg-green-50" : "bg-red-50"}`}>
+              <div className={`flex items-center gap-3 mb-6 p-4 rounded-xl ${isValid ? "bg-green-50 dark:bg-green-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
                 {isValid ? (
                   <CheckCircle2 className="w-8 h-8 text-green-600" />
                 ) : (
                   <XCircle className="w-8 h-8 text-red-600" />
                 )}
                 <div>
-                  <div className="font-serif text-lg text-foreground">{isValid ? "Valid Credential" : "Not Valid"}</div>
+                  <div className="font-serif text-lg text-foreground">{isValid ? "Verified Credential" : "Not Valid"}</div>
                   <div className="text-sm text-muted-foreground">Status: {result.status}</div>
                 </div>
               </div>
 
+              {/* Support Needs - Primary Focus */}
+              {isValid && (result as any).support_summary && (
+                <div className="mb-6 p-5 rounded-xl bg-primary/5 border border-primary/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Accessibility className="w-5 h-5 text-primary" />
+                    <h3 className="font-serif text-base font-semibold text-foreground">
+                      {(result as any).support_summary}
+                    </h3>
+                  </div>
+                  
+                  {(result as any).support_needs?.length > 0 && (
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <HandHelping className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Required Accommodations</span>
+                      </div>
+                      <ul className="space-y-2">
+                        {((result as any).support_needs as string[]).map((need: string, i: number) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                            <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                            {need}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="space-y-4">
                 <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Title</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Credential</div>
                   <div className="font-medium text-foreground">{result.title}</div>
                 </div>
                 <div>
@@ -228,7 +257,7 @@ const VerifyPage = () => {
                 </div>
                 {result.issuing_authority && (
                   <div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Issuing Authority</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Issued By</div>
                     <div className="font-medium text-foreground">{result.issuing_authority}</div>
                   </div>
                 )}

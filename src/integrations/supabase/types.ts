@@ -26,6 +26,8 @@ export type Database = {
           issuing_authority: string | null
           qr_code_token: string | null
           status: Database["public"]["Enums"]["credential_status"]
+          support_needs: string[] | null
+          support_summary: string | null
           title: string
           updated_at: string
           user_id: string
@@ -43,6 +45,8 @@ export type Database = {
           issuing_authority?: string | null
           qr_code_token?: string | null
           status?: Database["public"]["Enums"]["credential_status"]
+          support_needs?: string[] | null
+          support_summary?: string | null
           title: string
           updated_at?: string
           user_id: string
@@ -60,6 +64,8 @@ export type Database = {
           issuing_authority?: string | null
           qr_code_token?: string | null
           status?: Database["public"]["Enums"]["credential_status"]
+          support_needs?: string[] | null
+          support_summary?: string | null
           title?: string
           updated_at?: string
           user_id?: string
