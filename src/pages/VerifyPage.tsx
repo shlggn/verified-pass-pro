@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { QrCode, Search, ShieldCheck, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Camera, QrCode, Search, CheckCircle2, XCircle, AlertTriangle, X } from "lucide-react";
+import { Html5Qrcode } from "html5-qrcode";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +8,6 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import type { Tables } from "@/integrations/supabase/types";
-import { toast } from "sonner";
 
 const VerifyPage = () => {
   const { user } = useAuth();
@@ -15,41 +15,86 @@ const VerifyPage = () => {
   const [result, setResult] = useState<Tables<"credentials"> | null>(null);
   const [error, setError] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const scannerRef = useRef<Html5Qrcode | null>(null);
 
-  const handleVerify = async () => {
-    if (!token.trim()) return;
+  const verifyToken = async (qrToken: string) => {
     setSearching(true);
     setError(false);
     setResult(null);
 
     // Extract token from URL or use raw
-    let qrToken = token.trim();
-    if (qrToken.includes("/verify/")) {
-      qrToken = qrToken.split("/verify/").pop() || "";
+    let cleanToken = qrToken.trim();
+    if (cleanToken.includes("/verify/")) {
+      cleanToken = cleanToken.split("/verify/").pop() || "";
     }
 
     const { data, error: err } = await supabase
       .from("credentials")
       .select("id, title, credential_type, status, issuing_authority, expires_at, created_at")
-      .eq("qr_code_token", qrToken)
+      .eq("qr_code_token", cleanToken)
       .single();
 
     if (err || !data) {
       setError(true);
     } else {
       setResult(data as Tables<"credentials">);
-      // Log verification
       if (user) {
         await supabase.from("verification_logs").insert({
           credential_id: data.id,
           verifier_id: user.id,
           result: data.status === "approved" ? "valid" : "invalid",
-          verification_method: "manual_lookup",
+          verification_method: scanning ? "qr_scan" : "manual_lookup",
         });
       }
     }
     setSearching(false);
   };
+
+  const handleVerify = () => {
+    if (!token.trim()) return;
+    verifyToken(token);
+  };
+
+  const startScanner = async () => {
+    setScanning(true);
+    setError(false);
+    setResult(null);
+
+    try {
+      const html5QrCode = new Html5Qrcode("qr-reader");
+      scannerRef.current = html5QrCode;
+
+      await html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (decodedText) => {
+          stopScanner();
+          verifyToken(decodedText);
+        },
+        () => {} // Ignore scan errors
+      );
+    } catch (err) {
+      console.error("Camera error:", err);
+      setScanning(false);
+    }
+  };
+
+  const stopScanner = async () => {
+    if (scannerRef.current) {
+      try {
+        await scannerRef.current.stop();
+        scannerRef.current = null;
+      } catch (e) {}
+    }
+    setScanning(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      stopScanner();
+    };
+  }, []);
 
   const isValid = result?.status === "approved";
 
@@ -59,8 +104,44 @@ const VerifyPage = () => {
         <div>
           <h1 className="text-2xl font-serif text-foreground">Verify a Credential</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Enter a verification link or token to check credential validity
+            Scan a QR code or enter a verification link
           </p>
+        </div>
+
+        {/* Camera Scanner */}
+        <Card className="border-border overflow-hidden">
+          <CardContent className="p-6">
+            {!scanning ? (
+              <Button
+                onClick={startScanner}
+                className="w-full h-14 bg-primary text-primary-foreground rounded-xl gap-3 text-base"
+                size="lg"
+              >
+                <Camera className="w-5 h-5" />
+                Scan QR Code with Camera
+              </Button>
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-foreground">Scanning...</span>
+                  <Button variant="ghost" size="sm" onClick={stopScanner}>
+                    <X className="w-4 h-4" /> Cancel
+                  </Button>
+                </div>
+                <div id="qr-reader" className="w-full rounded-xl overflow-hidden" />
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Manual Input */}
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">or enter manually</span>
+          </div>
         </div>
 
         <Card className="border-border">
