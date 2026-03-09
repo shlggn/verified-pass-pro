@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Camera, QrCode, Search, CheckCircle2, XCircle, AlertTriangle, X } from "lucide-react";
+import { Camera, QrCode, Search, CheckCircle2, XCircle, AlertTriangle, X, Accessibility, HandHelping } from "lucide-react";
 import { Html5Qrcode } from "html5-qrcode";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
