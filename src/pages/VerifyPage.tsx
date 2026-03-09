@@ -156,7 +156,10 @@ const VerifyPage = () => {
                 <div id="qr-reader" className="w-full rounded-xl overflow-hidden" />
               </div>
             )}
-          </CardContent>
+
+        {cameraError && (
+          <div className="mt-3 text-sm text-destructive">{cameraError}</div>
+        )}
         </Card>
 
         {/* Manual Input */}
