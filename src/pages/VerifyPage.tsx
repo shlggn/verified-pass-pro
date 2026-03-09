@@ -31,7 +31,7 @@ const VerifyPage = () => {
 
     const { data, error: err } = await supabase
       .from("credentials")
-      .select("id, title, credential_type, status, issuing_authority, expires_at, created_at")
+      .select("id, title, credential_type, status, issuing_authority, expires_at, created_at, support_needs, support_summary")
       .eq("qr_code_token", cleanToken)
       .single();
 
