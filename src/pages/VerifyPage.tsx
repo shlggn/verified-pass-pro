@@ -56,26 +56,51 @@ const VerifyPage = () => {
     verifyToken(token);
   };
 
+  const [cameraError, setCameraError] = useState("");
+
   const startScanner = async () => {
-    setScanning(true);
     setError(false);
     setResult(null);
+    setCameraError("");
 
     try {
-      const html5QrCode = new Html5Qrcode("qr-reader");
-      scannerRef.current = html5QrCode;
+      // Request camera permission directly in the user gesture handler
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+      // Stop the stream immediately — html5-qrcode will re-acquire it
+      stream.getTracks().forEach((t) => t.stop());
 
-      await html5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        (decodedText) => {
-          stopScanner();
-          verifyToken(decodedText);
-        },
-        () => {} // Ignore scan errors
-      );
-    } catch (err) {
+      setScanning(true);
+
+      // Small delay to ensure the #qr-reader div is rendered
+      setTimeout(async () => {
+        try {
+          const html5QrCode = new Html5Qrcode("qr-reader");
+          scannerRef.current = html5QrCode;
+
+          await html5QrCode.start(
+            { facingMode: "environment" },
+            { fps: 10, qrbox: { width: 250, height: 250 } },
+            (decodedText) => {
+              stopScanner();
+              verifyToken(decodedText);
+            },
+            () => {}
+          );
+        } catch (innerErr) {
+          console.error("Scanner start error:", innerErr);
+          setCameraError("Could not start the QR scanner. Please try the manual input below.");
+          setScanning(false);
+        }
+      }, 100);
+    } catch (err: any) {
       console.error("Camera error:", err);
+      if (err?.name === "NotAllowedError") {
+        setCameraError("Camera access was denied. Please allow camera permissions in your browser settings.");
+      } else if (err?.name === "NotFoundError") {
+        setCameraError("No camera found on this device. Please use the manual input below.");
+      } else {
+        setCameraError("Could not access the camera. Please use the manual input below.");
+      }
       setScanning(false);
     }
   };
@@ -130,6 +155,9 @@ const VerifyPage = () => {
                 </div>
                 <div id="qr-reader" className="w-full rounded-xl overflow-hidden" />
               </div>
+            )}
+            {cameraError && (
+              <div className="mt-3 text-sm text-destructive">{cameraError}</div>
             )}
           </CardContent>
         </Card>
