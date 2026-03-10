@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Credentials from "./pages/Credentials";
 import ShareQR from "./pages/ShareQR";
 import VerifyCredential from "./pages/VerifyCredential";
+import VerifySharedCredential from "./pages/VerifySharedCredential";
 import VerifyPage from "./pages/VerifyPage";
 import AdminApplications from "./pages/AdminApplications";
 import AdminUsers from "./pages/AdminUsers";
