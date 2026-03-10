@@ -107,6 +107,50 @@ export type Database = {
         }
         Relationships: []
       }
+      shared_credentials: {
+        Row: {
+          created_at: string
+          credential_id: string
+          expires_at: string
+          id: string
+          integrity_hash: string
+          is_revoked: boolean
+          organization_name: string
+          share_token: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          credential_id: string
+          expires_at: string
+          id?: string
+          integrity_hash: string
+          is_revoked?: boolean
+          organization_name: string
+          share_token?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          credential_id?: string
+          expires_at?: string
+          id?: string
+          integrity_hash?: string
+          is_revoked?: boolean
+          organization_name?: string
+          share_token?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shared_credentials_credential_id_fkey"
+            columns: ["credential_id"]
+            isOneToOne: false
+            referencedRelation: "credentials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
