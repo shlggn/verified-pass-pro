@@ -30,8 +30,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/verify/:token" element={<VerifyCredential />} />
             <Route path="/verify/share/:shareToken" element={<VerifySharedCredential />} />
+            <Route path="/verify/:token" element={<VerifyCredential />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/dashboard/credentials" element={<ProtectedRoute><Credentials /></ProtectedRoute>} />
             <Route path="/dashboard/share" element={<ProtectedRoute><ShareQR /></ProtectedRoute>} />
