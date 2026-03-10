@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Credentials from "./pages/Credentials";
 import ShareQR from "./pages/ShareQR";
 import VerifyCredential from "./pages/VerifyCredential";
+import VerifySharedCredential from "./pages/VerifySharedCredential";
 import VerifyPage from "./pages/VerifyPage";
 import AdminApplications from "./pages/AdminApplications";
 import AdminUsers from "./pages/AdminUsers";
@@ -29,6 +30,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/verify/share/:shareToken" element={<VerifySharedCredential />} />
             <Route path="/verify/:token" element={<VerifyCredential />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/dashboard/credentials" element={<ProtectedRoute><Credentials /></ProtectedRoute>} />
