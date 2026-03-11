@@ -16,6 +16,7 @@ import VerifyPage from "./pages/VerifyPage";
 import AdminApplications from "./pages/AdminApplications";
 import AdminUsers from "./pages/AdminUsers";
 import VerificationHistory from "./pages/VerificationHistory";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,7 +40,7 @@ const App = () => (
             <Route path="/dashboard/history" element={<ProtectedRoute><VerificationHistory /></ProtectedRoute>} />
             <Route path="/dashboard/applications" element={<ProtectedRoute><AdminApplications /></ProtectedRoute>} />
             <Route path="/dashboard/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
-            <Route path="/dashboard/settings" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

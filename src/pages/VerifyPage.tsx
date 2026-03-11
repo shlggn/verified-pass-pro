@@ -25,6 +25,14 @@ const VerifyPage = () => {
 
     // Extract token from URL or use raw
     let cleanToken = qrToken.trim();
+    
+    // Handle shared credential URLs - redirect to shared verification
+    if (cleanToken.includes("/verify/share/")) {
+      const shareToken = cleanToken.split("/verify/share/").pop() || "";
+      window.location.href = `/verify/share/${shareToken}`;
+      return;
+    }
+    
     if (cleanToken.includes("/verify/")) {
       cleanToken = cleanToken.split("/verify/").pop() || "";
     }
@@ -33,7 +41,7 @@ const VerifyPage = () => {
       .from("credentials")
       .select("id, title, credential_type, status, issuing_authority, expires_at, created_at, support_needs, support_summary")
       .eq("qr_code_token", cleanToken)
-      .single();
+      .maybeSingle();
 
     if (err || !data) {
       setError(true);
