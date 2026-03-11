@@ -53,8 +53,9 @@ Deno.serve(async (req) => {
       .eq("user_id", shareData.user_id)
       .single();
 
-    // Recompute integrity hash for verification
-    const payload = `${shareData.credential_id}|${shareData.user_id}|${shareData.organization_name}|${shareData.created_at}|${shareData.expires_at}|${shareData.share_token}`;
+    // Recompute integrity hash - normalize timestamps to match generation format (ISO with Z)
+    const normalizeTs = (ts: string) => new Date(ts).toISOString();
+    const payload = `${shareData.credential_id}|${shareData.user_id}|${shareData.organization_name}|${normalizeTs(shareData.created_at)}|${normalizeTs(shareData.expires_at)}|${shareData.share_token}`;
     const encoder = new TextEncoder();
     const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(payload));
     const hashArray = Array.from(new Uint8Array(hashBuffer));
