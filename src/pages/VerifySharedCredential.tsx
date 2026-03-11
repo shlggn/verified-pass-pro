@@ -96,10 +96,15 @@ const VerifySharedCredential = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
         <Card className="max-w-md w-full border-destructive/30">
-          <CardContent className="p-8 text-center">
-            <XCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
-            <h1 className="font-serif text-2xl text-foreground mb-2">Certificate Not Found</h1>
+          <CardContent className="p-8 text-center space-y-4">
+            <XCircle className="w-16 h-16 text-destructive mx-auto" />
+            <h1 className="font-serif text-2xl text-foreground">Certificate Not Found</h1>
             <p className="text-muted-foreground text-sm">This verification link is invalid or has been removed.</p>
+            <div className="flex justify-center gap-3 pt-2">
+              <Button variant="outline" size="sm" asChild className="rounded-xl gap-2">
+                <Link to="/"><Home className="w-3.5 h-3.5" /> Home</Link>
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
