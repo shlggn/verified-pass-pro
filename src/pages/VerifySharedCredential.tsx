@@ -308,6 +308,14 @@ const VerifySharedCredential = () => {
           <p className="text-[10px] text-muted-foreground/60">
             Powered by Access Passport • Blockchain-verified credential sharing by SkyllSyft
           </p>
+          <div className="flex justify-center gap-3 pt-3">
+            <Button variant="outline" size="sm" asChild className="rounded-xl gap-2">
+              <Link to="/"><Home className="w-3.5 h-3.5" /> Home</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild className="rounded-xl gap-2">
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+          </div>
         </div>
       </motion.div>
     </div>
