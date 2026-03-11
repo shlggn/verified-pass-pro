@@ -68,7 +68,7 @@ Deno.serve(async (req) => {
     else if (new Date(shareData.expires_at) < new Date()) status = "expired";
     else if (credData?.status !== "approved") status = "invalid";
 
-    // Log the verification
+    // Log the verification using service role (bypasses RLS)
     const authHeader = req.headers.get("Authorization");
     let verifierId = null;
     if (authHeader) {
