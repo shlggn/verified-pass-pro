@@ -112,6 +112,15 @@ const VerifyCredential = () => {
             </CardContent>
           )}
         </Card>
+
+        <div className="flex justify-center mt-4 gap-3">
+          <Button variant="outline" size="sm" asChild className="rounded-xl gap-2">
+            <Link to="/"><ArrowLeft className="w-3.5 h-3.5" /> Home</Link>
+          </Button>
+          <Button variant="outline" size="sm" asChild className="rounded-xl gap-2">
+            <Link to="/dashboard">Dashboard</Link>
+          </Button>
+        </div>
       </motion.div>
     </div>
   );

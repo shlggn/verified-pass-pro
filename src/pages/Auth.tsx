@@ -91,12 +91,17 @@ const Auth = () => {
           transition={{ duration: 0.6 }}
           className="w-full max-w-md"
         >
-          {/* Mobile logo */}
-          <div className="lg:hidden flex items-center gap-2.5 mb-10">
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-              <Shield className="w-4 h-4 text-primary-foreground" />
+          {/* Back + Mobile logo */}
+          <div className="flex items-center gap-3 mb-10">
+            <Link to="/" className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <div className="lg:hidden flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+                <Shield className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <span className="font-serif text-lg text-foreground">Access Passport</span>
             </div>
-            <span className="font-serif text-lg text-foreground">Access Passport</span>
           </div>
 
           <h2 className="text-2xl font-serif text-foreground mb-2">
