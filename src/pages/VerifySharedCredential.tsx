@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Shield, Clock, Building2, Hash, CheckCircle2, XCircle, AlertTriangle, Link2, User, Layers, Eye } from "lucide-react";
+import { Shield, Clock, Building2, Hash, CheckCircle2, XCircle, AlertTriangle, Link2, User, Layers, Eye, ArrowLeft, Home } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
 type VerifyResult = {
