@@ -16,6 +16,7 @@ import VerifyPage from "./pages/VerifyPage";
 import AdminApplications from "./pages/AdminApplications";
 import AdminUsers from "./pages/AdminUsers";
 import VerificationHistory from "./pages/VerificationHistory";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
